@@ -1,48 +1,53 @@
-function Consultorio(nombre, paciente) {
+function Consultorio(nombre, paciente) { // Funcion contructora para colsultorio
+    // declaracion de bariables
     var _nombre = nombre;
-    var _paciente = paciente || [];
-    Object.defineProperty(this, "_getNombre", {
+    var _paciente = paciente || []; // valor o arreglo
+    Object.defineProperty(this, "_getNombre", {    // metodo getters
         get: function () {
             return _nombre;
         }
     });
-    Object.defineProperty(this, "_setNombre", {
+    Object.defineProperty(this, "_setNombre", { //metodo setters
         set: function (nombre) {
             _nombre = nombre;
         }
     });
 
 
+    // metodo propiedad prototype que permita buscar paciente
     Object.prototype.setBucarPaciente = function (paciente_buscar) {
         var consulto = this._getNombre;
         this._getPaciente.forEach(function (element, indice) {
 
             if (element._getNombre == paciente_buscar) {
-                console.log(element._getNombre + " - " + consulto)
-               
+                console.log("Paciente Encontrado con el nombre de : "+element._getNombre + " en las dependencias de : " + consulto)
+
             }
 
         })
 
     }
-
+    // metodo propiedad prototype que permita mostrar los datos registrados
     Object.prototype.setPacientetodos = function () {
         var consulto = this._getNombre;
         this._getPaciente.forEach(function (element, indice) {
 
-            console.log("Nombre : " + element._getNombre + " Rut : " + element._getRut + " Edad : " + element._getEdad + " Diagnostico : " + element._getDiagnostico + " Dependencia : " +consulto)
+            console.log("Nombre : " + element._getNombre + " Rut : " + element._getRut + " Edad : " + element._getEdad + " Diagnostico : " + element._getDiagnostico + " Dependencia : " + consulto)
 
         })
 
     }
 
-
+    //evitar cambios externos en las propiedades existentes en la función constructora.
+    // por medio del método Object.defineProperty 
     Object.defineProperty(this, "_getPaciente", {
         get: function () {
             return _paciente
         }
     });
 
+    //evitar cambios externos en las propiedades existentes en la función constructora.
+    // por medio del método Object.defineProperty 
     Object.defineProperty(this, "_setPaciente", {
         set: function (paciente) {
             _paciente = paciente;
@@ -54,35 +59,37 @@ function Consultorio(nombre, paciente) {
 
 
 
-function Paciente(nombre, edad, rut, diagnostico) {
-
+function Paciente(nombre, edad, rut, diagnostico) { // funcion contructora para Pacientes
+    // declaracion de variables y asignacion de valor
     var _nombre = nombre;
     var _edad = edad;
     var _rut = rut;
     var _diagnostico = diagnostico;
 
-    Object.defineProperty(this, "_getNombre", {
+    Object.defineProperty(this, "_getNombre", { // metodo getters
         get: function () {
             return _nombre;
         }
     });
-    Object.defineProperty(this, "_setNombre", {
+    Object.defineProperty(this, "_setNombre", { //metodo setters
         set: function (nombre) {
             _nombre = nombre;
         }
     });
 
 
-    Paciente.prototype.getNombre = function () {
+
+    Object.prototype.getNombre = function () {
         return this._getNombre;
     };
 
-    Paciente.prototype.setNombre = function (nombre) {
+    Object.prototype.setNombre = function (nombre) {
         this._setnombre = nombre;
     };
 
 
-
+    //evitar cambios externos en las propiedades existentes en la función constructora.
+    // por medio del método Object.defineProperty  para todas las variables declaradas
     Object.defineProperty(this, "_getEdad", {
         get: function () {
             return _edad;
@@ -130,7 +137,7 @@ function Paciente(nombre, edad, rut, diagnostico) {
 pacien1 = new Paciente("Pedro Donoso", 51, "1234307-4", "fractura")
 pacien2 = new Paciente("Alberto Donoso", 61, "34652307-4", "trombosis")
 pacien3 = new Paciente("Alejandra Perez", 34, "3484773-7", "golpe")
-consul1 = new Consultorio("consultorio Rotario", [pacien1, pacien2,pacien3]);
+consul1 = new Consultorio("consultorio Rotario", [pacien1, pacien2, pacien3]);
 
 // Instanciar Pacientes Consultorio 2
 pacien4 = new Paciente("pedro hernandez", 33, "23454507-6", "policontuso")
@@ -149,6 +156,7 @@ consul2 = new Consultorio("consultorio Santiago", [pacien4, pacien5, pacien6]);
 consul1.setBucarPaciente("Maria kass")
 consul2.setBucarPaciente("Maria kass")
 console.log("-------------------------------------")// separacion 
+console.log("Listado de pacientes")
 // listar los pacientes de consul1 y consul2 
 consul1.setPacientetodos();
 consul2.setPacientetodos();
